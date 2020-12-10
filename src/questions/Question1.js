@@ -17,15 +17,7 @@ export default function Question1 (props) {
 
 
   useEffect(() => {
-    console.log('title length!', title.length);
-
-    if (!title.length) {
-      setStateVar('errormessage', 'You need to enter a title!');
-    }
-    else {
-      setStateVar('errormessage', '');
-    }
-
+    setStateVar('errormessage', title.length ? '' : 'You need to enter a title!');
   }, [title]);
 
 
