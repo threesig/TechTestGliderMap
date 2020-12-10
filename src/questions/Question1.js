@@ -6,26 +6,51 @@ export default function Question1 (props) {
   // Feel free to use any (or no) external libraries you feel appropriate.
   // Endpoint docs: https://jsonplaceholder.typicode.com/guide/
 
-  const state = {
+
+  const [state, setState] = useState({
     title: '',
     body: '',
     userId: 1337,
-  }
-  const errormessage = '';
+    errormessage: '' // I am knowingly setting this to blank.  As Title is defaulted to '', technically this SHOULD be "You need to enter a title!".  I'm setting the side effect handle that.
+  });
+  const {title, body, userId, errormessage} = state;
+
 
   useEffect(() => {
-    if (state.title.length < 0) {
-      errormessage = "You need to enter a title!"
-    }
-  }, [state.username]);
+    console.log('title length!', title.length);
 
-  const handleSubmit = () => {
+    if (!title.length) {
+      setStateVar('errormessage', 'You need to enter a title!');
+    }
+    else {
+      setStateVar('errormessage', '');
+    }
+
+  }, [title]);
+
+
+  const setStateVar = (name, value) => {
+    const newState = Object.assign({}, state);
+    newState[name] = value;
+
+    setState(newState);
+  }
+
+
+  const handleInputChange = e => {
+    setStateVar(e.target.name, e.target.value);
+  }
+
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
     fetch('https://jsonplaceholder.typicode.com/posts',{
       method: 'post',
       data: JSON.toString({
-        title: state.title,
-        body: state.body,
-        userId: state.UserId
+        title,
+        body,
+        userId
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -35,39 +60,39 @@ export default function Question1 (props) {
       .then(json => console.log(json))
   }
 
+
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <div>
         <div>
           Title:
         </div>
-        <input name={state.title}/>
+        <input name="title" defaultValue={title} onInput={handleInputChange}/>
       </div>
 
       <div>
         <div>
           Body:
         </div>
-        <input name={state.body}/>
+        <input name="body" defaultValue={body} onInput={handleInputChange}/>
       </div>
 
       <div>
         <div>
           UserId:
         </div>
-        <select name={state.userId}>
+        <select name="userId" defaultValue={userId} onInput={handleInputChange}>
           <option>1337</option>
           <option>1234</option>
           <option>1066</option>
         </select>
       </div>
 
-      <div>
-        {errormessage}
-      </div>
+      {errormessage && <div>{errormessage}</div>}
 
-      <button onClick={handleSubmit()} style={{margin: 10}}>Submit</button>
-    </div>
+      <button type="submit" style={{margin: 10}} disabled={errormessage.length}>Submit</button>
+    </form>
 
   )
 }
