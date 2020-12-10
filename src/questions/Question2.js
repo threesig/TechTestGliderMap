@@ -16,20 +16,16 @@ export default function Question2 (props) {
     'Cheese'
   ];
 
-  const handleSearchTextChange = () => {
-
-  }
+  const handleSearchTextChange = e => setSearchText(e.target.value);
 
   return (
     <div>
       <input value={searchText} onChange={handleSearchTextChange}/>
-      {shoppingList.map(item => {
-        return (
-          <div>
-            {item}
-          </div>
-        )
-      })}
+      {shoppingList
+          .filter(item => item.toLowerCase().includes(searchText.toLowerCase()) )
+          .map((item, i) => (
+            <div key={`shopping-item-${i}`}>{item}</div>
+          ))}
     </div>
   )
 }
