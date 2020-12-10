@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <div style={{margin: 20}}>
-        {questions.map((question, index) => <button onClick={() => setCurrentQuestionIndex(index)}>{question}</button>)}
+        {questions.map((question, index) => <button key={`q-${index}`} onClick={() => setCurrentQuestionIndex(index)}>{question}</button>)}
       </div>
       <div style={{justifyContent: 'center', alignItems: 'center'}}>
         {renderQuestion()}
