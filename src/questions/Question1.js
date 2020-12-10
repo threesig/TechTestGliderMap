@@ -30,7 +30,8 @@ export default function Question1 (props) {
 
 
   const handleInputChange = e => {
-    setStateVar(e.target.name, e.target.value);
+    const {name, value} = e.target;
+    setStateVar(name, value);
   }
 
 
