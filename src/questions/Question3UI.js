@@ -13,3 +13,11 @@ export const GliderLoader = styled.div`
   opacity: ${props => props.isLoading ? 1: 0};
   pointer-events: ${props => props.isLoading ? 'all': 'none'};
 `;
+
+export const DepartureTable = styled.table`
+  margin: 0 auto;
+  td {
+    padding: 10px;
+  }
+  
+`
