@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GliderMarker from "./GliderMarker";
-import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import { withGoogleMap, withScriptjs, GoogleMap } from 'react-google-maps';
 const BELFAST_DEFAULT_LOCATION = {
   lat: 54.607868,
   lng: -5.926437
