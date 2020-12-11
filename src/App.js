@@ -3,6 +3,7 @@ import './App.css';
 import Question1 from "./questions/Question1";
 import Question2 from "./questions/Question2";
 import Question3 from "./questions/Question3";
+import {GliderProvider} from './contexts/GliderContext';
 
 function App() {
   const questions = [
@@ -24,7 +25,9 @@ function App() {
         )
       case 2:
         return (
-          <Question3/>
+          <GliderProvider>
+            <Question3/>
+          </GliderProvider>
         )
       default:
         return (
