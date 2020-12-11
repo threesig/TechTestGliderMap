@@ -27,7 +27,6 @@ export const GliderProvider = ({children}) => {
     .then(res => res.json())
     .then(newStops => {
       const stopList = newStops.stops;
-      console.log(Object.keys(stopList[0]));
       const stopUrls = stopList.map(stop => `${Endpoints.STOP_INFO}/${stop.id}`);
 
       fetchAll(stopUrls).then(stopDataListRaw => {
@@ -55,16 +54,13 @@ export const GliderProvider = ({children}) => {
       .then(data => ({ data, url }))
       .catch(error => ({ error, url }))
   ));
-
-
   const {stops, currentDateTime} = gliderState;
   const value = {
     isLoading: !currentDateTime,
     stops,
-    currentDateTime
+    currentDateTime,
   };
 
-  console.log(value);
   return (
   <GliderContext.Provider {...{value}}>
     {children}
