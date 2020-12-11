@@ -6,7 +6,9 @@ export const GliderContainer = styled.div`
 
 export const GliderLoader = styled.div`
   transition: opacity 500ms;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #fff;
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
