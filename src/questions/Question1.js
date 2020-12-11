@@ -61,21 +61,21 @@ export default function Question1 (props) {
         <div>
           Title:
         </div>
-        <input name="title" defaultValue={title} onInput={handleInputChange}/>
+        <input name="title" defaultValue={title} onChange={handleInputChange}/>
       </div>
 
       <div>
         <div>
           Body:
         </div>
-        <input name="body" defaultValue={body} onInput={handleInputChange}/>
+        <input name="body" defaultValue={body} onChange={handleInputChange}/>
       </div>
 
       <div>
         <div>
           UserId:
         </div>
-        <select name="userId" defaultValue={userId} onInput={handleInputChange}>
+        <select name="userId" defaultValue={userId} onChange={handleInputChange}>
           <option>1337</option>
           <option>1234</option>
           <option>1066</option>
