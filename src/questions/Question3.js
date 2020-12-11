@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
-import Endpoints from "../util/Endpoints";
+import React, {useEffect, useState, useContext} from "react";
+import GliderContext from '../contexts/GliderContext';
 import GliderMap from "../components/GliderMap";
+import * as UI from './Question3UI';
 
 export default function Question3 (props) {
   //Displaying real-time metrics for our devices' locations and statuses is a critical component of our reporting strategy.
@@ -19,34 +20,12 @@ export default function Question3 (props) {
   // This file contains the map component and two endpoints to obtain Stop data.
 
 
-  const [stops, setStops] = useState([]);
+  const {stops, isLoading, currentDateTime} = useContext(GliderContext);
 
-  useEffect(() => {
-    fetchStops();
-  }, [])
-
-  const fetchStops = () => {
-    fetch(Endpoints.STOPS)
-      .then(res => res.json())
-      .then(newStops => {
-        if (newStops.stops.length) {
-          setStops(newStops.stops);
-        }
-      })
-      .catch(e => console.log(e))
-  }
-
-  const fetchStopInfo = (stop) => {
-    fetch(Endpoints.STOP_INFO + '/' + stop.id)
-      .then(res => res.json())
-      .then(stopInfo => {
-        //do something
-      })
-      .catch(e => console.log(e))
-  }
 
   return (
-    <div>
+    <UI.GliderContainer>
+      {currentDateTime && <div>{`${currentDateTime.getHours()}:${currentDateTime.getMinutes()}`}</div>}
       <GliderMap
         stops={stops}
         googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyBkHRuOEvL8BERtTR0oIB-mw8e0QkMVA2U&v=3.exp&libraries=geometry,drawing,places'}
@@ -54,6 +33,7 @@ export default function Question3 (props) {
         containerElement={<div style={{ height: `800px`, margin: 20 }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-    </div>
+      <UI.GliderLoader {...{isLoading}}/>
+    </UI.GliderContainer>
   );
 }
