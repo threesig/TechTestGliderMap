@@ -9,12 +9,43 @@ const GliderMarker = ({position, label, departures}) => {
   const handleMouseOver = () => setShowDepartures(true);
   const handleMouseOut = () => setShowDepartures(false);
 
+  const {min_until: nextBusDepartsIn} = departures[0];
+
+  const setColorUrgency = min_until => {
+    return min_until <= 10
+            ? '#ff0000'
+            : min_until <= 30
+              ? '#ffff00'
+              : '#00ff00';
+  }
+
+  const setScaleUrgency = min_until => {
+    return min_until <= 10
+      ? 1.5
+      : min_until <= 30
+        ? 1
+        : .5;
+  }
+
+
+
+  const icon  = {
+    path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+    fillColor: setColorUrgency(nextBusDepartsIn),
+    fillOpacity: .6,
+    // anchor: new google.maps.Point(0,0),
+    strokeWeight: 0,
+    scale: setScaleUrgency(nextBusDepartsIn)
+  }
+
   return (
   <div>
-    <Marker {...{position, label, onMouseOver: handleMouseOver, onMouseOut: handleMouseOut}} />
+    <Marker {...{position, label, onMouseOver: handleMouseOver, onMouseOut: handleMouseOut, icon}}
+    />
     {showDepartures && (
       <div>
         <h2>{label} Departures</h2>
+        <h3>Next Bus Departs in {nextBusDepartsIn} Minute{nextBusDepartsIn!==1 && 's'}{nextBusDepartsIn<=1 && '!!'}</h3>
         <UI.DepartureTable>
           <thead>
           <tr>
