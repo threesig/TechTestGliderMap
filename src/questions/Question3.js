@@ -33,7 +33,7 @@ export default function Question3 (props) {
         containerElement={<div style={{ height: `800px`, margin: 20 }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-      <UI.GliderLoader {...{isLoading}}/>
+      <UI.GliderLoader {...{isLoading}}>Loading...</UI.GliderLoader>
     </UI.GliderContainer>
   );
 }
