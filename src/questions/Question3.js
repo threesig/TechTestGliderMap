@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useContext} from "react";
 import GliderContext from '../contexts/GliderContext';
 import GliderMap from "../components/GliderMap";
 import * as UI from './Question3UI';
@@ -25,7 +25,7 @@ export default function Question3 (props) {
 
   return (
     <UI.GliderContainer>
-      {currentDateTime && <div>{`${currentDateTime.getHours()}:${currentDateTime.getMinutes()}`}</div>}
+      {currentDateTime && <div>{`${currentDateTime.getHours()}:${String(currentDateTime.getMinutes()).padStart(2, "0")}`}</div>}
       <GliderMap
         stops={stops}
         googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyBkHRuOEvL8BERtTR0oIB-mw8e0QkMVA2U&v=3.exp&libraries=geometry,drawing,places'}

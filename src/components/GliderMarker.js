@@ -14,7 +14,7 @@ const GliderMarker = ({position, label, departures}) => {
     <Marker {...{position, label, onMouseOver: handleMouseOver, onMouseOut: handleMouseOut}} />
     {showDepartures && (
       <div>
-        <h2>{label}</h2>
+        <h2>{label} Departures</h2>
         <UI.DepartureTable>
           <thead>
           <tr>
@@ -24,8 +24,8 @@ const GliderMarker = ({position, label, departures}) => {
           </tr>
           </thead>
           <tbody>
-          {departures.map(({from, to, min_until}) => (
-            <tr>
+          {departures.map(({from, to, min_until}, i) => (
+            <tr key={`${label}-${i}`}>
               <td>{from}</td>
               <td>{to}</td>
               <td>{min_until}</td>
